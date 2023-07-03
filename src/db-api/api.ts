@@ -47,8 +47,12 @@ export const getById = (req: Request, res: Response): void => {
 
 export const create = (req: Request, res: Response): void => {
   const { username, age, hobbies } = req.body
-  if( username && age && hobbies ) {
-    const answer = {
+  if(typeof username === 'string'
+    && typeof age === 'number'
+    && hobbies instanceof Array
+    && hobbies.every(item => typeof item === 'string')) {
+
+      const answer = {
       id: generateId(),
       username,
       age: Number(age),
@@ -59,7 +63,7 @@ export const create = (req: Request, res: Response): void => {
     res.json(answer)
   } else {
     res.status(400)
-    res.send('You should specify all the required params: username, age, hobbies')
+    res.send('You should specify all the required params with correct types: username, age, hobbies')
   }
 }
 
