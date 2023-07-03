@@ -1,3 +1,3 @@
-import { getAll, getById, create, edit } from "./api";
+import { getAll, getById, create, edit, deleteUser } from "./api";
 
-export { getAll, getById, create, edit };
+export { getAll, getById, create, edit, deleteUser };

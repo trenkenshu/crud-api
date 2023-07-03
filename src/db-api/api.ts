@@ -103,3 +103,25 @@ export const edit = (req: Request, res: Response): void => {
   res.send('Cant update user, there\'s not a sigle one that match the id provided')
 }
 
+export const deleteUser = (req: Request, res: Response): void => {
+  const { id } = req.params;
+  if(!validateId(id)) {
+    res.status(400)
+    res.send('Incorrect id format, is should be 20 digits string')
+
+  return
+  }
+
+  const user = db.find(item => item.id === id)
+  if(user) {
+    const index = db.indexOf(user)
+    const deleted = db.splice(index, 1)[0]
+    res.status(204)
+    res.send()
+
+    return
+  }
+
+  res.status(404)
+  res.send('Cant find user that match the id provided')
+}
