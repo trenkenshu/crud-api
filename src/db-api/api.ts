@@ -68,7 +68,8 @@ export const create = (req: Request, res: Response): void => {
 }
 
 export const edit = (req: Request, res: Response): void => {
-  const { id, username, age, hobbies } = req.body
+  const { id } = req.params
+  const { username, age, hobbies } = req.body
   if(!validateId(id)) {
     res.status(400)
     res.send('Cant update user with incorrect id, it should be 20 digits string')
