@@ -67,3 +67,39 @@ export const create = (req: Request, res: Response): void => {
   }
 }
 
+export const edit = (req: Request, res: Response): void => {
+  const { id, username, age, hobbies } = req.body
+  if(!validateId(id)) {
+    res.status(400)
+    res.send('Cant update user with incorrect id, it should be 20 digits string')
+
+    return
+  }
+
+  const user = db.find(item => item.id === id)
+  if(user) {
+    username
+      && typeof username === 'string'
+      && Object.defineProperty(user,  'username', {
+        value: username
+      } )
+    age
+      && typeof age === 'number'
+      && Object.defineProperty(user, 'age', {
+        value: age
+      })
+    hobbies instanceof Array
+      && hobbies.every(item => typeof item === 'string')
+      && Object.defineProperty(user, 'hobbies', {
+        value: hobbies
+      })
+    res.status(200)
+    res.json(user)
+
+    return
+  }
+
+  res.status(404)
+  res.send('Cant update user, there\'s not a sigle one that match the id provided')
+}
+

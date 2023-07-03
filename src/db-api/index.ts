@@ -1,3 +1,3 @@
-import { getAll, getById, create } from "./api";
+import { getAll, getById, create, edit } from "./api";
 
-export { getAll, getById, create };
+export { getAll, getById, create, edit };
