@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "start:dev": "ts-node ./src/index.js",
-     "test": "jest --testTimeout=10000"
+    "start:dev": "ts-node ./src/index.ts",
+    "start:prod": "tsc ./src/index.ts && node ./src/index.js",
+    "test": "jest --testTimeout=10000"
   },
   "dependencies": {
     "@types/dotenv": "^8.2.0",
