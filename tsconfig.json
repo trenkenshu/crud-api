@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "outFile": "./prod/bundle.js",
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
