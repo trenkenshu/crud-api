@@ -1,6 +1,12 @@
 import { Request, Response } from "express";
-import db from "../db";
+//import db from "../db";
 import { IdbItem } from "../db/types";
+import * as c from 'cluster';
+
+const cluster = c as unknown as c.Cluster;
+let db: IdbItem[] = [];
+
+export const updateDb = (newDb: IdbItem[]) => db = newDb
 
 export const validateId = (id: string): boolean => {
   return /^[0-9]{20}$/.test(id)
@@ -61,6 +67,9 @@ export const create = (req: Request, res: Response): void => {
     db.push(answer)
     res.status(201)
     res.json(answer)
+    if(cluster.isWorker) {
+      process.send(JSON.stringify(db))
+    }
   } else {
     res.status(400)
     res.send('You should specify all the required params with correct types: username, age, hobbies')
@@ -94,8 +103,12 @@ export const edit = (req: Request, res: Response): void => {
       && Object.defineProperty(user, 'hobbies', {
         value: hobbies
       })
+
     res.status(200)
     res.json(user)
+    if(cluster.isWorker) {
+      process.send(JSON.stringify(db))
+    }
 
     return
   }
@@ -119,6 +132,9 @@ export const deleteUser = (req: Request, res: Response): void => {
     const deleted = db.splice(index, 1)[0]
     res.status(204)
     res.send()
+    if(cluster.isWorker) {
+      process.send(JSON.stringify(db))
+    }
 
     return
   }

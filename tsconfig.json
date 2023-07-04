@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
     "outFile": "./prod/bundle.js",
-    "strict": true,
-    "esModuleInterop": false,
   },
   "exclude": [
     "node_modules"

@@ -1,6 +1,7 @@
 {
   "scripts": {
     "start:dev": "ts-node ./src/index.ts",
+    "start:multi": "ts-node ./src/index.ts multi",
     "start:prod": "tsc ./src/index.ts && node ./src/index.js",
     "test": "jest --testTimeout=10000"
   },

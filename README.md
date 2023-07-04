@@ -24,5 +24,6 @@
 ## Other
 - You can compile production with `npm run start:prod` but not in separate folder
 - You can run test (6 cases): `npm run test`
+- You can run `npm run start:multi` to use api in multi-threaded mode (up to 8 threads)
 
 
